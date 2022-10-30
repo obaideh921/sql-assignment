@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION Calculate_salary(p_sal number,p_date date)
+
+  RETURN NUMBER IS
+  
+  v_dailysal number(20);
+  
+  v_totalsal v_dailysal%type;
+
+  
+  BEGIN
+  
+  v_dailysal:=p_sal /(last_day(sysdate) - round(sysdate,'MONTH')-1);
+  
+  v_totalsal:= p_sal - v_dailysal * (last_day(sysdate)-sysdate);
+    RETURN   v_totalsal;
+  END   Calculate_salary;
